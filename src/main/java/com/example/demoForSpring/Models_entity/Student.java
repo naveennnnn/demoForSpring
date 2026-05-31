@@ -24,13 +24,25 @@ public class Student {
 
     @Column(name="email")
     private String email;
+
+    @Column(name="url")
+    private String url;
     
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public Student(){}
 
-    public Student(String firstName, String lastName, String email) {
+    public Student(String firstName, String lastName, String email,String url) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.url = url;
     }
 
     public int getId() {
@@ -64,6 +76,4 @@ public class Student {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-
 }

@@ -28,9 +28,33 @@ public class DemoForSpringApplication {
 	@Bean
 	public CommandLineRunner commandLineApp(StudentDaoImpl studentDaoImpl){ // this function will be executed after the spring beans are loaded.
 		return runner -> {
-			// createAndSaveStudent(studentDaoImpl);
-			readAll(studentDaoImpl);
+			createAndSaveStudent(studentDaoImpl);
+			// updateStudent(studentDaoImpl);
+
+			// deleteStudent(studentDaoImpl);
+
+			// deleteAllStudent(studentDaoImpl);
 		};
+	}
+
+
+	private void deleteAllStudent(StudentDaoImpl studentDaoImpl) {
+		int rows = studentDaoImpl.deleteAll();
+		System.out.println("Number of rows deleted: "+rows);
+	}
+
+
+	private void deleteStudent(StudentDaoImpl studentDaoImpl) {
+		studentDaoImpl.delete(1);
+	}
+
+
+	private void updateStudent(StudentDaoImpl studentDaoImpl) {
+		Student student = studentDaoImpl.findById(2000);
+
+		student.setFirstName("Hello");
+
+		studentDaoImpl.update(student);
 	}
 
 
@@ -52,7 +76,7 @@ public class DemoForSpringApplication {
 
 	private void createAndSaveStudent(StudentDAO studentDaoImpl) {
 		System.out.println("Createing the student");
-		Student student = new Student("Arun","Chermadurai","arun@gmail.com");
+		Student student = new Student("Naveen","Boopathy","naveen@gmail.com","url");
 
 		System.out.println("Saving the student");
 		studentDaoImpl.save(student);

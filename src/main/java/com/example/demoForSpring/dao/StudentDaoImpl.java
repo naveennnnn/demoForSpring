@@ -2,6 +2,7 @@ package com.example.demoForSpring.dao;
 
 import java.util.List;
 
+import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -36,6 +37,33 @@ public class StudentDaoImpl implements StudentDAO{
     public List<Student> findAll(){
         TypedQuery<Student> query = entityManager.createQuery("From Student",Student.class); //THe from (Student)-> is not the database table name but the entity name, here in query we should only use entityName and entityFieldName and not the database.
         return query.getResultList();
+    }
+
+    @Override
+    @Transactional
+    public void update(Student student) {
+
+        entityManager.merge(student);
+
+        Query query = entityManager.createQuery("update Student s set s.lastName = 'LEVEL' where s.id=:Id");
+        query.setParameter("Id",student.getId());
+        int numRowsUpdated = query.executeUpdate();
+        
+        System.out.println(numRowsUpdated);
+    }
+
+    @Override
+    @Transactional
+    public void delete(int id) {
+        Student managedStudent = entityManager.find(Student.class,id);
+        entityManager.remove(managedStudent);
+    }
+
+    @Override
+    @Transactional
+    public int deleteAll() {
+        int numRowsDeleted = entityManager.createQuery("Delete FROM Student").executeUpdate();
+        return numRowsDeleted;
     }
     
 }
