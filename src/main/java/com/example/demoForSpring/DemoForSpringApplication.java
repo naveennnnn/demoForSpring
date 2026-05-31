@@ -1,7 +1,15 @@
 package com.example.demoForSpring;
 
+import java.util.List;
+
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import com.example.demoForSpring.Models_entity.Student;
+import com.example.demoForSpring.dao.StudentDAO;
+import com.example.demoForSpring.dao.StudentDaoImpl;
 
 
 //cmd /c "set "JAVA_HOME=C:\Users\naveen.b\jdk\jdk-24.0.2" && mvnw.cmd clean compile -q"
@@ -16,7 +24,53 @@ public class DemoForSpringApplication {
 		SpringApplication.run(DemoForSpringApplication.class, args);
 	}
 
+
+	@Bean
+	public CommandLineRunner commandLineApp(StudentDaoImpl studentDaoImpl){ // this function will be executed after the spring beans are loaded.
+		return runner -> {
+			// createAndSaveStudent(studentDaoImpl);
+			readAll(studentDaoImpl);
+		};
+	}
+
+
+	private void readStudent(StudentDAO studentDaoImpl) {
+		System.out.println("Createing the student");
+		Student student = new Student("Arun","Chermadurai","arun@gmail.com");
+
+		System.out.println("Saving the student");
+		studentDaoImpl.save(student);
+
+		int id = student.getId();
+
+		System.out.println("Student Saved with ID: "+id);
+
+		Student myStudent = studentDaoImpl.findById(id);
+		System.out.println("The retrieved student is : "+myStudent);
+	}
+
+
+	private void createAndSaveStudent(StudentDAO studentDaoImpl) {
+		System.out.println("Createing the student");
+		Student student = new Student("Arun","Chermadurai","arun@gmail.com");
+
+		System.out.println("Saving the student");
+		studentDaoImpl.save(student);
+
+		System.out.println("Student Saved with ID: "+student.getId());
+	} 
+
+
+	public void readAll(StudentDAO studentDaoImpl){
+		List<Student> students = studentDaoImpl.findAll();
+
+		for(Student student: students){
+			System.out.println(student.getId()+" "+student.getFirstName());
+		}
+	}
+
 }
+
 // The default scope of a bean in springboot - Singleton
 
 // ./mvnw clean package -DskipTests
