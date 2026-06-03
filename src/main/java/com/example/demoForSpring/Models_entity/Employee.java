@@ -8,11 +8,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="Student")
-public class Student {
+@Table(name="Employee")
+public class Employee {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)// there are various other GenerationType available, we can select based on the requirement. We can also create our own custom generationType
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
 
@@ -25,24 +25,18 @@ public class Student {
     @Column(name="email")
     private String email;
 
-    @Column(name="url")
-    private String url;
-    
-    public String getUrl() {
-        return url;
+    public Employee() {
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public Student(){}
-
-    public Student(String firstName, String lastName, String email,String url) {
+    public Employee(int id, String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
     }
 
     public int getId() {
@@ -61,12 +55,6 @@ public class Student {
         this.firstName = firstName;
     }
 
-    @Override
-    public String toString() {
-        return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-                + ", url=" + url + "]";
-    }
-
     public String getLastName() {
         return lastName;
     }
@@ -82,4 +70,6 @@ public class Student {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    
 }
