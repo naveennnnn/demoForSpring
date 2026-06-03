@@ -28,7 +28,7 @@ public class DemoForSpringApplication {
 	@Bean
 	public CommandLineRunner commandLineApp(StudentDaoImpl studentDaoImpl){ // this function will be executed after the spring beans are loaded.
 		return runner -> {
-			createAndSaveStudent(studentDaoImpl);
+			// createAndSaveStudent(studentDaoImpl);
 			// updateStudent(studentDaoImpl);
 
 			// deleteStudent(studentDaoImpl);
@@ -60,7 +60,7 @@ public class DemoForSpringApplication {
 
 	private void readStudent(StudentDAO studentDaoImpl) {
 		System.out.println("Createing the student");
-		Student student = new Student("Arun","Chermadurai","arun@gmail.com");
+		Student student = new Student("Arun","Chermadurai","arun@gmail.com","url");
 
 		System.out.println("Saving the student");
 		studentDaoImpl.save(student);
