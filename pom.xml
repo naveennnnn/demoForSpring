@@ -61,6 +61,11 @@
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!--This is used to reduce the boilerplate code for the restApi, just adding JPARepository will work.-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
