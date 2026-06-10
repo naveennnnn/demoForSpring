@@ -62,9 +62,14 @@
 			<scope>runtime</scope>
 		</dependency>
 		<!--This is used to reduce the boilerplate code for the restApi, just adding JPARepository will work.-->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-rest</artifactId>
+		</dependency> -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>3.0.0</version>
 		</dependency>
 	</dependencies>
 
